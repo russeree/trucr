@@ -9,19 +9,15 @@ pub struct BitcoinRpcClient {
 
 impl BitcoinRpcClient {
     pub fn new() -> Result<Self, Box<dyn std::error::Error>> {
-        let rpc_url = "http://192.168.3.89:18443";
+        let rpc_url = "http://192.168.1.2:8332";
         let auth = Auth::UserPass(
-            "test".to_string(),
-            "test".to_string(),
+            "reese".to_string(),
+            "reesebtc".to_string(),
         );
 
         let client = Client::new(rpc_url, auth)?;
 
         Ok(Self { client })
-    }
-
-    pub fn get_client(&self) -> &Client {
-        &self.client
     }
 
     #[allow(dead_code)]

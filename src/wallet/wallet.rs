@@ -94,9 +94,10 @@ impl BitcoinWallet {
         let mut emitter = Emitter::new(&client, wallet_tip, start_height);
         
         while let Ok(Some(block_event)) = emitter.next_block() {
-            // Write block to file
             self.wallet.apply_block_connected_to(&block_event.block, block_event.block_height(), block_event.connected_to())
                 .map_err(|e| WalletError::Wallet(e.to_string()))?;
+
+            
 
             self.wallet.persist(&mut self.db)
                 .map_err(|e| WalletError::Database(e.to_string()))?;
